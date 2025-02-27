@@ -83,11 +83,11 @@ const CodeView = () => {
       options={{
         externalResources:['https://unpkg.com/@tailwindcss/browser@4']
       }}
-      // customSetup={{
-      //   dependencies:{
-      //     ...Lookup.DEPENDENCY
-      //   }
-      // }}
+      customSetup={{
+        dependencies:{
+          ...Lookup.DEPENDENCY
+        }
+      }}
       >
     <SandpackLayout>
      {activeTab=='code'&& <>

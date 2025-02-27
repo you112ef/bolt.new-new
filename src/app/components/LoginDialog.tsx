@@ -39,7 +39,7 @@ const LoginDialog = ({openDialog,closeDialog}) => {
             uid: uuid4(),
           })
           if(typeof window !== 'undefined'){
-            localStorage.setItem('userDetail',JSON.stringify(user))
+            localStorage.setItem('user',JSON.stringify(user))
           }
           setUserDetail(userInfo.data)
           closeDialog(false);
