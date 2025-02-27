@@ -58,7 +58,7 @@ const LoginDialog = ({openDialog,closeDialog}) => {
                 <h2 className='font-bold text-2xl text-white'>{Lookup.SIGNIN_HEADING}</h2>
                 <p className='mt-2 text-center'>{Lookup.SIGNIN_SUBHEADING}</p>
                 <Button onClick={() => googleLogin()} className='bg-blue-500 mt-2 hover:bg-blue-400'>Sign In with Google</Button>
-                <p>{Lookup.SIGNIn_AGREEMENT_TEXT}</p>
+                <p>{Lookup.SIGNIN_AGREEMENT_TEXT}</p>
                 </div>
             </DialogDescription>
             </DialogHeader>
