@@ -9,63 +9,50 @@ export default {
   SIGNIN_SUBHEADING: 'To use Bolt you must log into an existing account or create one.',
   SIGNIN_AGREEMENT_TEXT: 'By using Bolt, you agree to the collection of usage data for analytics.',
 
-  DEFAULT_FILE:{
-    "/public/index.html": {
+  DEFAULT_FILE: {
+    '/public/index.html': {
       code: `<!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React App</title>
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <div id="root"></div>
   </body>
-  </html>`
+</html>`
     },
-    "/src/App.tsx": {
-      code: `import React from 'react';
-  
-  const App: React.FC = () => {
-    return <h1>Hello, React + TypeScript!</h1>;
-  };
-  
-  export default App;`
+    '/App.css': {
+      code: `
+            @tailwind base;
+@tailwind components;
+@tailwind utilities;`
     },
-    "/src/index.tsx": {
-      code: `import React from 'react';
-  import ReactDOM from 'react-dom/client';
-  import App from './App';
-  
-  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );`
+    '/tailwind.config.js': {
+      code: `
+            /** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}`
     },
-    "/package.json": {
-      code: `{
-    "name": "react-ts-app",
-    "version": "1.0.0",
-    "main": "index.tsx",
-    "dependencies": {
-      "react": "^18.0.0",
-      "react-dom": "^18.0.0"
-    },
-    "devDependencies": {
-      "typescript": "^5.0.0"
-    }
-  }`
-    },
-    "/tsconfig.json": {
-      code: `{
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "ESNext",
-      "jsx": "react-jsx",
-      "strict": true
-    }
-  }`
+    '/postcss.config.js': {
+      code: `/** @type {import('postcss-load-config').Config} */
+const config = {
+  plugins: {
+    tailwindcss: {},
+  },
+};
+
+export default config;
+`
     }
   },
   DEPENDENCY: {
