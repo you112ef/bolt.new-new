@@ -78,7 +78,7 @@ const CodeView = () => {
           onClick={()=>setActiveTab('preview')}>Preview</h2>
         </div>
       </div>
-      <SandpackProvider template='react' theme={'dark'} 
+      <SandpackProvider template='react-ts' theme={'dark'} 
       files={Files}
       options={{
         externalResources:['https://unpkg.com/@tailwindcss/browser@4']
