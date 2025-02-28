@@ -7,10 +7,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         const result = await GenAICode.sendMessage(prompt);
         const res =  result.response.text();
         return NextResponse.json(JSON.parse(res));
-    } catch (err: any) {
-        console.error("Error processing request:", err);
-        return NextResponse.json({
-            error: err.message || "Internal Server Error"
-        });
+    } catch (e) {
+        return NextResponse.json({error:"error sending message"});
     }
 }
