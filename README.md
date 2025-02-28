@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bolt.new clone
+- Create React frontend with prompts
+
+![image](https://github.com/user-attachments/assets/0ba917df-743c-42e5-85ec-5ac5b95795c4)
+
+- Generating Code
+  
+  ![image](https://github.com/user-attachments/assets/866b5702-41d7-4719-943a-6d3065b309f4)
+  
+![image](https://github.com/user-attachments/assets/6e1cb4e7-7d56-464d-b9ff-51e4ea38459c)
+> Sometimes got time limit exceed if that happens try to resend request
+
+![image](https://github.com/user-attachments/assets/3fc2a964-13ca-4573-b739-7f44a2322b65)
+
 
 ## Getting Started
 
