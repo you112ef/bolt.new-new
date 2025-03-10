@@ -5,7 +5,7 @@
 
 - Generating Code
   
-> Try this app locally because it's taking more than 10 sec to respond so it got an error
+> First code request might take some time because it's backend is deployed on render
   ![image](https://github.com/user-attachments/assets/866b5702-41d7-4719-943a-6d3065b309f4)
   
 ![image](https://github.com/user-attachments/assets/6e1cb4e7-7d56-464d-b9ff-51e4ea38459c)
