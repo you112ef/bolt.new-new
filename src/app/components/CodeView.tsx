@@ -57,7 +57,7 @@ const CodeView = () => {
     console.log("ai-code",result.data)
     const aiResponse=result.data
 
-    const mergeFiles= {...Files,...aiResponse?.files}
+    const mergeFiles= {...Files,...aiResponse.files}
     setFiles(mergeFiles)
     await UpdateFiles({
       workspaceId:id as any,
@@ -78,7 +78,7 @@ const CodeView = () => {
           onClick={()=>setActiveTab('preview')}>Preview</h2>
         </div>
       </div>
-      <SandpackProvider template='react-ts' theme={'dark'} 
+      <SandpackProvider template='react' theme={'dark'} 
       files={Files}
       options={{
         externalResources:['https://unpkg.com/@tailwindcss/browser@4']
