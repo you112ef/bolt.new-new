@@ -9,8 +9,10 @@ import LoginDialog from './LoginDialog';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const Hero = () => {
+  axios.get('https://bolt-backend-c0rp.onrender.com')
   const [userInput, setUserInput] = useState('');
   const messageContext = useContext(MessageContext);
   const userDetailContext = useContext(UserDetailContext);

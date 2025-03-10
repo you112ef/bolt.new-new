@@ -51,7 +51,7 @@ const CodeView = () => {
     setActiveTab('code')
     setLoading(true)
     const PROMPT= JSON.stringify(messages)+" "+Prompt.CODE_GEN_PROMPT
-    const result= await axios.post('/api/ai-code',{
+    const result= await axios.post('https://bolt-backend-c0rp.onrender.com/ai-code',{
       prompt: PROMPT
     })
     console.log("ai-code",result.data)
