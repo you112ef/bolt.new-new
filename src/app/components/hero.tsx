@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const Hero = () => {
-  axios.get('https://bolt-backend-c0rp.onrender.com')
+  axios.get('https://bolt-backend-c0rp.onrender.com/ai-code')
   const [userInput, setUserInput] = useState('');
   const messageContext = useContext(MessageContext);
   const userDetailContext = useContext(UserDetailContext);
