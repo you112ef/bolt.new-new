@@ -6,7 +6,7 @@ import Lookup from '@/data/Lookup';
 import { ArrowRight, Link } from 'lucide-react';
 import React, { useContext, useState } from 'react';
 import LoginDialog from './LoginDialog';
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -25,6 +25,9 @@ const Hero = () => {
   const { userDetail, setUserDetail } = userDetailContext;
   const [openDialog, setOpenDialog] = useState(false);
   const Createworkspace = useMutation(api.workspace.CreateWorkSpace);
+  const getUserId = useQuery(api.user.GetUser, 
+    userDetail?.email ? { email: userDetail.email } : "skip"
+  );
   const router = useRouter();
 
   const onGenerate = async (input: string) => {
@@ -38,11 +41,14 @@ const Hero = () => {
     };
     setMessages(msg as any);
     try {
+      if (!getUserId) {
+        console.error("User not found in database");
+        return;
+      }
       const workspaceId = await Createworkspace({
-        user: userDetail._id,
+        user: getUserId._id,
         message: [msg],
       });
-      // console.log(workspaceId);
       router.push('/workspace/' + workspaceId);
     } catch (error) {
       console.error("Error creating workspace:", error);

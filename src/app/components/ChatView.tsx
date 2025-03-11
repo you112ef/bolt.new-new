@@ -1,6 +1,6 @@
 "use client"
 import { useConvex, useMutation } from 'convex/react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
 import { api } from '../../../convex/_generated/api';
 import { MessageContext } from '@/data/context/MessageContext';
@@ -20,12 +20,16 @@ const ChatView = () => {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const UpdateMessages= useMutation(api.workspace.UpdateMessages)
-
+  const router = useRouter();
   useEffect(() => {
     if (id) {
       GetWorkspaceData();
     }
   }, [id]);
+
+  if(!userDetail){
+    router.push('/')
+  }
 
   const GetWorkspaceData = async () => {
     try {

@@ -4,7 +4,7 @@ import { mutation, query } from "./_generated/server";
 export const CreateWorkSpace = mutation({
   args: {
     message: v.any(),
-    user: v.id('users'), // Ensure this matches the correct table name
+    user: v.id('user'), // Ensure this matches the correct table name
   },
   handler: async (ctx, args) => {
     const workspaceId = await ctx.db.insert('workspace', {

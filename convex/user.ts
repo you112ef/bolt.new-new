@@ -11,11 +11,11 @@ export const CreateUser = mutation({
     },
     handler: async (ctx, args) => {
         // Your handler logic here
-        const user = await ctx.db.query('users').filter((q)=>q.eq(q.field('email'),args.email)).collect();
+        const user = await ctx.db.query('user').filter((q)=>q.eq(q.field('email'),args.email)).collect();
         // console.log(user);
 
         if(user.length==0){
-            const result =  await ctx.db.insert('users',{
+            const result =  await ctx.db.insert('user',{
                 name: args.name,
                 picture:args.picture,
                 email:args.email,
@@ -31,7 +31,7 @@ export const GetUser=query({
         email: v.string()
     },
     handler:async (ctx ,args)=>{
-        const user = await ctx.db.query('users').filter((q)=>q.eq(q.field('email'),args.email)).collect();
+        const user = await ctx.db.query('user').filter((q)=>q.eq(q.field('email'),args.email)).collect();
         // console.log(user);
         return user[0];
     }

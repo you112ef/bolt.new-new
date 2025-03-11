@@ -57,7 +57,7 @@ const CodeView = () => {
     console.log("ai-code",result.data)
     const aiResponse=result.data
 
-    const mergeFiles= {...Files,...aiResponse.files}
+    const mergeFiles= {...Files,...aiResponse?.files}
     setFiles(mergeFiles)
     await UpdateFiles({
       workspaceId:id as any,
