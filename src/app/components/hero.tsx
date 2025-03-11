@@ -41,12 +41,13 @@ const Hero = () => {
     };
     setMessages(msg as any);
     try {
-      if (!getUserId) {
+      const userData = getUserId;
+      if (!userData) {
         console.error("User not found in database");
         return;
       }
       const workspaceId = await Createworkspace({
-        user: getUserId._id,
+        user: userData._id,
         message: [msg],
       });
       router.push('/workspace/' + workspaceId);
