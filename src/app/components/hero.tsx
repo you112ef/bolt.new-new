@@ -25,7 +25,7 @@ const Hero = () => {
   const { userDetail, setUserDetail } = userDetailContext;
   const [openDialog, setOpenDialog] = useState(false);
   const Createworkspace = useMutation(api.workspace.CreateWorkSpace);
-  const getUserId = useQuery(api.user.GetUser, 
+  const getUserData = useQuery(api.user.GetUser, 
     userDetail?.email ? { email: userDetail.email } : "skip"
   );
   const router = useRouter();
@@ -41,16 +41,17 @@ const Hero = () => {
     };
     setMessages(msg as any);
     try {
-      const userData = getUserId;
-      if (!userData) {
+      if (!getUserData?._id) {
         console.error("User not found in database");
         return;
       }
       const workspaceId = await Createworkspace({
-        user: userData._id,
+        user: getUserData._id,
         message: [msg],
       });
-      router.push('/workspace/' + workspaceId);
+      if (workspaceId) {
+        router.push('/workspace/' + workspaceId);
+      }
     } catch (error) {
       console.error("Error creating workspace:", error);
     }
