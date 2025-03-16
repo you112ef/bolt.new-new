@@ -21,15 +21,18 @@ const ChatView = () => {
   const [loading, setLoading] = useState(false);
   const UpdateMessages= useMutation(api.workspace.UpdateMessages)
   const router = useRouter();
+
+  useEffect(() => {
+    if (!userDetail?.name) {
+      router.push('/');
+    }
+  }, [userDetail, router]);
+
   useEffect(() => {
     if (id) {
       GetWorkspaceData();
     }
   }, [id]);
-
-  if(!userDetail){
-    router.push('/')
-  }
 
   const GetWorkspaceData = async () => {
     try {
@@ -108,12 +111,18 @@ const ChatView = () => {
             className="outline-none bg-transparent w-full h-24 max-h-56 resize-none"
             onChange={(e) => setUserInput(e.target.value)}
             value={userInput}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                onGenerate(userInput);
+              }
+            }}
           />
           {userInput && (
-            <ArrowRight
-              onClick={() => onGenerate(userInput)}
-              className="bg-blue-500 p-2 h-10 w-10 rounded-md cursor-pointer"
-            />
+           <ArrowRight
+             onClick={() => onGenerate(userInput)}
+             className="bg-blue-500 p-2 h-10 w-10 rounded-md cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+           />
           )}
         </div>
         <div>

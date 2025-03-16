@@ -66,7 +66,8 @@ files:{
 - proper spacing between elements and padding
 - don't create src folder
 - after creating the project, update package.json file 
-- Use stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags.
+- get images from web/internet but only working not broken
+-  Do not download the images, only link to them in image tags.
    `,
 
 

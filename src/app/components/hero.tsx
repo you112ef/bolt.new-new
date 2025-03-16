@@ -64,15 +64,24 @@ const Hero = () => {
 
       <div className="p-5 border rounded-xl max-w-xl w-full mt-3 bg-[#151515]">
         <div className="flex gap-2 ">
-          <textarea
+        <textarea
             placeholder={Lookup.INPUT_PLACEHOLDER}
-            className="outline-none bg-transparent w-full h-28 max-h-56 resize-none"
+            className="outline-none bg-transparent w-full h-24 max-h-56 resize-none"
             onChange={(e) => setUserInput(e.target.value)}
+            value={userInput}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                onGenerate(userInput);
+              }
+            }}
           />
           {userInput && (
             <ArrowRight
               onClick={() => onGenerate(userInput)}
-              className="bg-blue-500 p-2 h-10 w-10 rounded-md cursor-pointer"
+              onKeyDown={(e) => e.key === 'Enter' && onGenerate(userInput)}
+              tabIndex={0}
+              className="bg-blue-500 p-2 h-10 w-10 rounded-md cursor-pointer hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             />
           )}
         </div>
