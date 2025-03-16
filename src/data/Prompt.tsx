@@ -10,7 +10,7 @@ export default{
 `,
 
 CODE_GEN_PROMPT:dedent`
-Generate a Project in React. Create multiple components, organizing them in separate folders with filenames using the .js extension, if needed. The output should use Tailwind CSS for styling, 
+Generate a Project in React app. Create multiple components, organizing them in separate folders with filenames using the .js extension, if needed. The output should use Tailwind CSS for styling, 
 without any third-party dependencies or libraries, except for icons from the lucide-react library, which should only be used when necessary. Available icons include: Heart, Shield, Clock, Users, Play, Home, Search, Menu, User, Settings, Mail, Bell, Calendar, Star, Upload, Download, Trash, Edit, Plus, Minus, Check, X, and ArrowRight. For example, you can import an icon as import { Heart } from "lucide-react" and use it in JSX as <Heart className="" />.
 also you can use date-fns for date format and react-chartjs-2 chart, graph library
 
@@ -53,18 +53,19 @@ files:{
   }
 }
   Additionally, include an explanation of the project's structure, purpose, and functionality in the explanation field. Make the response concise and clear in one paragraph.
-  - When asked then only use this package to import, here are some packages available to import and use (date-fns,react-chartjs-2,"firebase","@google/generative-ai" ) only when it required
+  - When asked then only use this package to import, here are some packages available to import and use (date-fns, chart.js, react-chartjs-2) only when it required
   
   - For placeholder images, please use a https://archive.org/download/placeholder-image/placeholder-image.jpg
   -Add Emoji icons whenever needed to give good user experinence
   - all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
 
-- Design a visually stunning and modern UI for a web application. The interface should be clean, minimalistic, and highly functional, with a focus on usability and aesthetics. Use a well-balanced color palette, smooth animations, and responsive layouts. The design should include intuitive navigation, engaging typography, and interactive elements that enhance user experience. Incorporate soft shadows, rounded corners, and a grid-based layout for an elegant look. Ensure accessibility and a seamless user experience across all devices. 
-- Use neutral colors (grays, soft blues, muted tones,etc) for UI elements to create a professional look.
-- Apply subtle shadows to cards, buttons, and containers for depth and visual hierarchy.
-- Implement hover effects and cursor:pointer for interactive elements like buttons and links.
-- Ensure adequate padding and spacing between UI elements for better readability.
+- By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
 
+- Use icons from lucide-react for logos only when needed.
+- use shadows and cards
+- proper spacing between elements and padding
+- don't create src folder
+- after creating the project, update package.json file 
 - Use stock photos from unsplash where appropriate, only valid URLs you know exist. Do not download the images, only link to them in image tags.
    `,
 
