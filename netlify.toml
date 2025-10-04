@@ -6,10 +6,5 @@
   NODE_VERSION = "18"
   NEXT_PUBLIC_CONVEX_URL = "https://placeholder.convex.cloud"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[functions]
-  directory = ".next/serverless"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

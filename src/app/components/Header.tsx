@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { UserDetailContext } from '@/data/context/UserDetailContext'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useContext, useState } from 'react'
 import LoginDialog from './LoginDialog';
 import { LogOut } from 'lucide-react'
@@ -31,9 +32,9 @@ const Header = () => {
 
   return (
     <div className='p-4 flex items-center justify-between'>
-      <a href='/'>
+      <Link href='/'>
         <Image src={"https://bolt.new/static/favicon.svg"} alt='Logo' width={50} height={50} />
-      </a>
+      </Link>
       {!userDetail?.name && (
         <div className='flex gap-5'>
           <Button variant={'ghost'} onClick={handleOpenDialog}>Sign in</Button>

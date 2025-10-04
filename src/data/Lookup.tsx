@@ -1,6 +1,6 @@
 import dedent from "dedent";
 
-export default {
+const lookupData = {
   SUGGESTIONS: ['Create ToDo App in React', 'Create Budget Track App', 'Create Gym Management Portal Dashboard', 'Create Quiz App On History', 'Create Login Signup Screen'],
   HERO_HEADING: 'What do you want to build?',
   HERO_DESC: 'Prompt, run, edit, and deploy full-stack web apps.',
@@ -109,5 +109,6 @@ export default config;
     }
   ]
 
-
 }
+
+export default lookupData;

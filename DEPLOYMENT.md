@@ -42,11 +42,21 @@ NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
 
 3. **Set Environment Variables**
    - Go to Site settings > Environment variables
-   - Add all required environment variables listed above
+   - Add all required environment variables listed above:
+     - `NEXT_PUBLIC_GEMINI_API_KEY` - Your Google Gemini API key
+     - `OPENROUTER_API_KEY` - Your OpenRouter API key
+     - `NEXT_PUBLIC_APP_URL` - Your deployed domain URL
+     - `NEXT_PUBLIC_CONVEX_URL` - Your Convex deployment URL (optional)
 
 4. **Deploy**
    - Click "Deploy site"
-   - Netlify will automatically build and deploy
+   - Netlify will automatically build and deploy using the @netlify/plugin-nextjs
+
+### Important Notes for Netlify
+- The project uses `@netlify/plugin-nextjs` for proper Next.js support
+- API routes (`/api/ai-chat` and `/api/ai-code`) will work as Netlify Functions
+- Client-side routing is handled by the `_redirects` file in the public directory
+- The `netlify.toml` file is configured for optimal Next.js deployment
 
 ### Method 2: Manual Deploy
 
