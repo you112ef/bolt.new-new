@@ -94,6 +94,30 @@ export const AI_MODELS: AIModel[] = [
     description: 'Efficient and fast Mistral model',
     maxTokens: 32000,
     cost: '$0.20/1M tokens'
+  },
+  {
+    id: 'qwen/qwen2-72b-instruct',
+    name: 'Qwen 2 72B',
+    provider: 'openrouter',
+    description: 'Qwen\'s powerful instruction-tuned model',
+    maxTokens: 128000,
+    cost: '$0.90/1M tokens'
+  },
+  {
+    id: 'deepseek/deepseek-v2-chat',
+    name: 'DeepSeek V2',
+    provider: 'openrouter',
+    description: 'DeepSeek\'s advanced chat model',
+    maxTokens: 128000,
+    cost: '$0.14/1M tokens'
+  },
+  {
+    id: 'z.ai/glm-4-9b-chat',
+    name: 'GLM-4 9B',
+    provider: 'openrouter',
+    description: 'A powerful and efficient chat model by Z.AI',
+    maxTokens: 128000,
+    cost: '$0.10/1M tokens'
   }
 ];
 
