@@ -17,14 +17,23 @@ Set these environment variables in your hosting platform:
 ```env
 # Required for AI functionality
 NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
-OPENROUTER_API_KEY=your_openrouter_api_key_here
+NEXT_PUBLIC_OPENROUTER_API_KEY=your_openrouter_api_key_here
 
 # Required for OpenRouter referer header
 NEXT_PUBLIC_APP_URL=https://your-domain.com
 
-# Optional - for Convex backend features
+# Google OAuth (for authentication)
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+
+# Optional - for Convex backend features (not required for static deployment)
 NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
 ```
+
+**Important Notes:**
+- All API keys must be prefixed with `NEXT_PUBLIC_` to be accessible in the browser
+- The application works without Convex - it uses localStorage for data persistence
+- OpenRouter API key is required for premium models (GPT-4o, Claude, etc.)
+- Gemini API key is required for free models
 
 ## Netlify Deployment
 

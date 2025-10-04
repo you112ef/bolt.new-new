@@ -6,8 +6,7 @@ import Lookup from '@/data/Lookup';
 import { ArrowRight, Link } from 'lucide-react';
 import React, { useContext, useState } from 'react';
 import LoginDialog from './LoginDialog';
-import { useMutation, useQuery } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+// Removed Convex imports for static build
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
@@ -24,10 +23,7 @@ const Hero = () => {
   const { messages, setMessages } = messageContext;
   const { userDetail, setUserDetail } = userDetailContext;
   const [openDialog, setOpenDialog] = useState(false);
-  const Createworkspace = useMutation(api.workspace.CreateWorkSpace);
-  const getUserData = useQuery(api.user.GetUser, 
-    userDetail?.email ? { email: userDetail.email } : "skip"
-  );
+  // Removed Convex mutations for static build
   const router = useRouter();
 
   const onGenerate = async (input: string) => {
@@ -40,21 +36,8 @@ const Hero = () => {
       content: input,
     };
     setMessages(msg as any);
-    try {
-      if (!getUserData?._id) {
-        console.error("User not found in database");
-        return;
-      }
-      const workspaceId = await Createworkspace({
-        user: getUserData._id,
-        message: [msg],
-      });
-      if (workspaceId) {
-        router.push('/workspace/' + workspaceId);
-      }
-    } catch (error) {
-      console.error("Error creating workspace:", error);
-    }
+    // For static build, just navigate to a default workspace
+    router.push('/workspace/default');
   };
 
   return (

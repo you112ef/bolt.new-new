@@ -1,28 +1,23 @@
 "use client"
 import { useParams, useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
-import { useConvexSafe, useUpdateMessagesSafe } from '@/hooks/useConvexSafe';
 import { MessageContext } from '@/data/context/MessageContext';
 import { UserDetailContext } from '@/data/context/UserDetailContext';
 import { useModel } from '@/data/context/ModelContext';
 import Image from 'next/image';
 import { ArrowRight, Link, Loader, Loader2Icon } from 'lucide-react';
 import Lookup from '@/data/Lookup';
-import axios from 'axios';
 import Prompt from '@/data/Prompt';
 import ModelSelector from './ModelSelector';
 import { AIClient } from '@/lib/ai-client';
 
-
-const ChatView = () => {
+const ChatViewStatic = () => {
   const { id } = useParams();
-  const convex = useConvexSafe();
   const { messages, setMessages } = useContext<any>(MessageContext);
   const { userDetail, setUserDetail } = useContext<any>(UserDetailContext);
   const { selectedModel, setSelectedModel } = useModel();
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const UpdateMessages = useUpdateMessagesSafe();
   const router = useRouter();
 
   useEffect(() => {
@@ -39,22 +34,11 @@ const ChatView = () => {
 
   const GetWorkspaceData = async () => {
     try {
-      if (!convex) {
-        console.warn("Convex not available, using local storage");
-        const savedMessages = localStorage.getItem(`workspace-${id}`);
-        if (savedMessages) {
-          setMessages(JSON.parse(savedMessages));
-        }
-        return;
+      // Use localStorage for static builds
+      const savedMessages = localStorage.getItem(`workspace-${id}`);
+      if (savedMessages) {
+        setMessages(JSON.parse(savedMessages));
       }
-      
-      const { api } = await import('../../../convex/_generated/api');
-      const result = await convex.query(api.workspace.GetWorkspace, {
-        workspaceId: id as any,
-      });
-      // console.log("Workspace data:", result);
-      setMessages(result?.message );
-      console.log("Messages set:", messages);
     } catch (error) {
       console.error("Error fetching workspace data:", error);
     }
@@ -68,6 +52,7 @@ const ChatView = () => {
         }
     }
   },[messages])
+
   const GetAiResponse= async ()=>{
     setLoading(true)
     const PROMPT= JSON.stringify(messages)+ Prompt.CHAT_PROMPT
@@ -77,31 +62,15 @@ const ChatView = () => {
       const aiResponse={role:'ai',content:result.result}
       const newMessages = [...messages,aiResponse];
       setMessages(newMessages);
-      // console.log("ai:",result.result)
       
-      // Save to Convex if available, otherwise use localStorage
-      if (UpdateMessages) {
-        await UpdateMessages({
-          message: newMessages,
-          workspaceId:id as any
-        });
-      } else {
-        localStorage.setItem(`workspace-${id}`, JSON.stringify(newMessages));
-      }
+      // Save to localStorage for static builds
+      localStorage.setItem(`workspace-${id}`, JSON.stringify(newMessages));
     } catch (error) {
       console.error("Error getting AI response:", error);
       const errorResponse = {role:'ai',content:"I'm sorry, I encountered an error. Please check your API keys and try again."};
       const newMessages = [...messages,errorResponse];
       setMessages(newMessages);
-      
-      if (UpdateMessages) {
-        await UpdateMessages({
-          message: newMessages,
-          workspaceId:id as any
-        });
-      } else {
-        localStorage.setItem(`workspace-${id}`, JSON.stringify(newMessages));
-      }
+      localStorage.setItem(`workspace-${id}`, JSON.stringify(newMessages));
     }
     
     setLoading(false)
@@ -177,4 +146,4 @@ const ChatView = () => {
   );
 };
 
-export default ChatView;
+export default ChatViewStatic;

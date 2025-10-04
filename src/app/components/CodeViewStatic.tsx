@@ -8,24 +8,20 @@ import {
   SandpackFileExplorer,
 } from "@codesandbox/sandpack-react";
 import Lookup from '@/data/Lookup';
-import axios from 'axios';
 import { MessageContext } from '@/data/context/MessageContext';
 import { useModel } from '@/data/context/ModelContext';
 import Prompt from '@/data/Prompt';
 import { AIClient } from '@/lib/ai-client';
-import { useConvexSafe, useUpdateFilesSafe } from '@/hooks/useConvexSafe';
 import { useParams } from 'next/navigation';
 import { Loader2Icon } from 'lucide-react';
 
-const CodeView = () => {
+const CodeViewStatic = () => {
   const {id}=useParams()
   const [activeTab,setActiveTab]=useState('code')
   const [Files,setFiles]=useState(Lookup.DEFAULT_FILE)
   const {messages,setMessages}=useContext<any>(MessageContext)
   const {selectedModel} = useModel()
   const [loading,setLoading]=useState(false)
-  const UpdateFiles = useUpdateFilesSafe();
-  const convex = useConvexSafe();
 
   useEffect(()=>{
     id&&GetFiles()
@@ -34,19 +30,19 @@ const CodeView = () => {
   const GetFiles=async()=>{
     setLoading(true)
     
-    if (!convex) {
-      console.warn("Convex not available, using default files");
+    try {
+      // Use localStorage for static builds
+      const savedFiles = localStorage.getItem(`workspace-files-${id}`);
+      if (savedFiles) {
+        setFiles(JSON.parse(savedFiles));
+      } else {
+        setFiles(Lookup.DEFAULT_FILE);
+      }
+    } catch (error) {
+      console.error("Error loading files:", error);
       setFiles(Lookup.DEFAULT_FILE);
-      setLoading(false);
-      return;
     }
     
-    const { api } = await import('../../../convex/_generated/api');
-    const result= await convex.query(api.workspace.GetWorkspace,{
-      workspaceId:id as any
-    })
-    const mergeFiles= {...result?.fileData}
-    setFiles(mergeFiles)
     setLoading(false)
   }
 
@@ -58,6 +54,7 @@ const CodeView = () => {
         }
     }
   },[messages])
+
   const GenerateAiCode=async()=>{
     setActiveTab('code')
     setLoading(true)
@@ -70,24 +67,14 @@ const CodeView = () => {
       const mergeFiles= {...Files,...aiResponse?.files}
       setFiles(mergeFiles)
       
-      // Save to Convex if available, otherwise use localStorage
-      if (UpdateFiles) {
-        await UpdateFiles({
-          workspaceId:id as any,
-          fileData:aiResponse?.files
-        });
-      } else {
-        localStorage.setItem(`workspace-files-${id}`, JSON.stringify(mergeFiles));
-      }
+      // Save to localStorage for static builds
+      localStorage.setItem(`workspace-files-${id}`, JSON.stringify(mergeFiles));
     } catch (error) {
       console.error("Error generating code:", error);
-      // Set error state or show error message
     }
     
     setLoading(false)
   }
-
-
 
   return (
     <div className='relative'>
@@ -131,4 +118,4 @@ const CodeView = () => {
   )
 }
 
-export default CodeView
+export default CodeViewStatic

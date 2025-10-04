@@ -5,8 +5,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { MessageContext } from "@/data/context/MessageContext";
 import { UserDetailContext } from "@/data/context/UserDetailContext";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useConvex } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+// Removed Convex imports for static build
 
 interface UserDetail {
   _id: string;
@@ -29,7 +28,6 @@ export function ThemeProvider({
 
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [userDetail, setUserDetail] = React.useState<UserDetail | null>(null);
-  const convex = useConvex();
 
   React.useEffect(() => {
     IsAuthenticated();
@@ -39,11 +37,9 @@ export function ThemeProvider({
     if (typeof window !== 'undefined') {
       const user = JSON.parse(localStorage.getItem('user') as string);
       if (user && user.email) {
-        const result = await convex.query(api.user.GetUser, {
-          email: user.email
-        });
-        setUserDetail(result as any);
-        console.log(result);
+        // For static build, just use the user data from localStorage
+        setUserDetail(user as any);
+        console.log("User authenticated:", user);
       }
     }
   };

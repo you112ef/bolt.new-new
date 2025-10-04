@@ -46,13 +46,16 @@ Create a `.env.local` file in the root directory:
 NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
 
 # OpenRouter API Key (Required for premium models)
-OPENROUTER_API_KEY=your_openrouter_api_key_here
+NEXT_PUBLIC_OPENROUTER_API_KEY=your_openrouter_api_key_here
 
 # App URL (for OpenRouter referer header)
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-# Convex (if using Convex backend)
-CONVEX_DEPLOYMENT=your_convex_deployment_url
+# Google OAuth (for authentication)
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+
+# Convex (Optional - for backend features)
+NEXT_PUBLIC_CONVEX_URL=your_convex_deployment_url
 ```
 
 ### 3. Get API Keys

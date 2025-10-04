@@ -12,15 +12,14 @@ import { Button } from '@/components/ui/button'
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
 import { UserDetailContext } from '@/data/context/UserDetailContext'
-import { useMutation } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
+// Removed Convex imports for static build
 import uuid4 from 'uuid4'
 
   
 //   @ts-ignore
 const LoginDialog = ({openDialog,closeDialog}) => {
     const {userDetail,setUserDetail}=useContext<any>(UserDetailContext)
-    const CreateUser= useMutation(api.user.CreateUser)
+    // Removed Convex mutation for static build
 
     const  googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -32,12 +31,7 @@ const LoginDialog = ({openDialog,closeDialog}) => {
       
           console.log(userInfo);
           const user= userInfo.data;
-          await CreateUser({
-            name: user?.name,
-            email: user?.email,
-            picture: user?.picture,
-            uid: uuid4(),
-          })
+          // For static build, just save to localStorage
           if(typeof window !== 'undefined'){
             localStorage.setItem('user',JSON.stringify(user))
           }

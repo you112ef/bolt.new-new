@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_PUBLIC_CONVEX_URL=https://placeholder.convex.cloud next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
