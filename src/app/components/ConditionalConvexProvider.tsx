@@ -3,14 +3,19 @@
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { ReactNode } from "react";
 
-export function ConvexClientProvider({ children }: { children: ReactNode }) {
-  // Only render ConvexProvider if we have a valid URL
-  if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
+interface ConditionalConvexProviderProps {
+  children: ReactNode;
+}
+
+export function ConditionalConvexProvider({ children }: ConditionalConvexProviderProps) {
+  // Check if Convex is configured
+  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+  
+  if (!convexUrl) {
     console.warn("NEXT_PUBLIC_CONVEX_URL not found. Convex features will be disabled.");
-    return <>{children}</>;
+    return <div>{children}</div>;
   }
   
-  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
   const convex = new ConvexReactClient(convexUrl);
   return <ConvexProvider client={convex}>{children}</ConvexProvider>;
 }
