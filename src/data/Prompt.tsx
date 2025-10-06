@@ -1,6 +1,6 @@
 import dedent from "dedent";
 
-export default{
+const promptData = {
   CHAT_PROMPT:dedent`
   'You are a AI Assistant and experience in React Development.
   GUIDELINES:
@@ -75,3 +75,5 @@ files:{
 }
 
 // - The lucide-react library is also available to be imported IF NECCESARY ONLY FOR THE FOLLOWING ICONS: Heart, Shield, Clock, Users, Play, Home, Search, Menu, User, Settings, Mail, Bell, Calendar, Clock, Heart, Star, Upload, Download, Trash, Edit, Plus, Minus, Check, X, ArrowRight. Here's an example of importing and using one: import { Heart } from "lucide-react"\` & \<Heart className=""  />\. PLEASE ONLY USE THE ICONS IF AN ICON IS NEEDED IN THE USER'S REQUEST.
+
+export default promptData;
